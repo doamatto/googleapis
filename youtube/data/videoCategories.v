@@ -1,23 +1,29 @@
 import net.http
 
+struct VideoCatsOptions {
+	filters VideoCatsOptions_Filters
+	hl string
+}
+struct VideoCatsOptions_Filters {
+	id string
+	regionCode string
+}
+
+struct VideoCatsResponse {
+	kind string
+	etag string
+	nextPageToken string
+	prevPageToken string
+	pageInfo Response_PageInfo
+	items map
+}
+struct VideoCatsResponse_PageInfo {
+	totalResults int
+	resultsPerPage int
+}
+
 // Returns a list of categories that can be associated with YouTube videos. For more information, see https://developers.google.com/youtube/v3/docs/videoCategories/list
-pub fn videoCategories_list(part string, options ?[]{
-	filters: {
-		id: string,
-		regionCode: string,
-	},
-	hl: string,
-}) []{
-	kind: string,
-	etag: string,
-	nextPageToken: string,
-	prevPageToken: string,
-	pageInfo: {
-		totalResults: int,
-		resultsPerPage: int,
-	},
-	items: [],
-} {
+pub fn videocategories_list(part string, options ?VideoCatsOptions) VideoCatsResponse {
 	url := "https://www.googleapis.com/youtube/v3/videoCategories?part=$part"
 	if (filters != nil) {
 		// Can only have one filter
