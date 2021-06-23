@@ -24,8 +24,7 @@ struct VideoCatsResponse_PageInfo {
 
 // Returns a list of categories that can be associated with YouTube videos. For more information, see https://developers.google.com/youtube/v3/docs/videoCategories/list
 pub fn videocategories_list(part string, options ?VideoCatsOptions) VideoCatsResponse {
-	url := "https://www.googleapis.com/youtube/v3/videoCategories?part=$part"
-	if (filters != nil) {
+	mut url := "https://www.googleapis.com/youtube/v3/videoCategories?part=$part"
 		// Can only have one filter
 		if (filters.id && filters.regionCode) { return err }
 		if (filters.id) { url += "&id=$filters.id" }
