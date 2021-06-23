@@ -53,8 +53,7 @@ struct SearchResponse_PageInfo {
 
 // Returns a list of categories that can be associated with YouTube videos. For more information, see https://developers.google.com/youtube/v3/docs/videoCategories/list
 pub fn search_list(part string, options SearchOptions) SearchResponse {
-	url := "https://www.googleapis.com/youtube/v3/videoCategories?part=$part"
-	if (filters != nil) {
+	mut url := "https://www.googleapis.com/youtube/v3/videoCategories?part=$part"
 		// Can only have one filter
 		// TODO: prevent usage of more than one
 		if (filters.forContentOwner) {
