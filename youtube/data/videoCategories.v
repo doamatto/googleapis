@@ -23,6 +23,7 @@ pub fn videoCategories_list(part string, options ?[]{
 		// Can only have one filter
 		if (filters.id && filters.regionCode) { return err }
 		if (filters.id) { url += "&id=$filters.id" }
+		// TOOD: add check for regionCode
 		if (filters.regionCode) { url += "&regionCode=$filters.regionCode" }
 	}  
 
