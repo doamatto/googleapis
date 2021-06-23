@@ -1,4 +1,7 @@
 # Google APIs for V
+
+**Note:** this library is far from done. To see my progress so far, [look here.](https://github.com/doamatto/googleapis/milestone/1)
+
 This is a library for all of the Google APIs written in Vlang using only modules in [vlib*.](https://modules.vlang.io/)
 
 ## Usage
