@@ -2,7 +2,7 @@ import json
 import net.http
 import time
 
-struct Options {
+struct ActivitiesOptions {
 	filters Options_Filters
 	maxResults u16
 	pageToken string
@@ -11,13 +11,13 @@ struct Options {
 	regionCode string // Must be ISO 3166-1 alpha-2
 }
 
-struct Options_Filters {
-		// Can only have one filter
-		channelId string
-		mine bool
+struct ActivitiesOptions_Filters {
+	// Can only have one filter
+	channelId string
+	mine bool
 }
 
-struct Response {
+struct ActivitiesResponse {
 	kind string
 	etag string
 	nextPageToken string
@@ -26,13 +26,13 @@ struct Response {
 	items map
 }
 
-struct Response_PageInfo {
-		totalResults int
-		resultsPerPage int
+struct ActivitiesResponse_PageInfo {
+	totalResults int
+	resultsPerPage int
 }
 
 // Returns a list of channel activity events that match the request criteria. For more information, see https://developers.google.com/youtube/v3/docs/activities/list
-pub fn activites_list(part string, options? Options) Response {
+pub fn activites_list(part string, options? ActivitiesOptions) ActivitiesResponse {
 	url := "https://www.googleapis.com/youtube/v3/activites?part=$part"
 	if (filters != nil) {
 		// Can only have one filter
