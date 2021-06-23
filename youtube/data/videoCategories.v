@@ -28,6 +28,7 @@ pub fn videocategories_list(part string, options ?VideoCatsOptions) VideoCatsRes
 	mut url := "https://www.googleapis.com/youtube/v3/videoCategories?part=$part"
 	if options.filters != {} {
 		// Can only have one filter
+		if options.filters.id != "" && options.filters.region_code != "" { return err }
 		if options.filters.id != "" { url += "&id=$options.filters.id" }
 		// TOOD: add check for regionCode
 		if options.filters.region_code != "" { url += "&regionCode=$options.filters.region_code" }
