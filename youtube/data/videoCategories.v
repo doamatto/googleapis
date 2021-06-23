@@ -35,8 +35,8 @@ pub fn videocategories_list(part string, options ?VideoCatsOptions) VideoCatsRes
 	}  
 	if options.hl != "" { url += "&hl=$options.hl" }
 
-	resp := http.get(url) or { return println(err) }
-	body := json.decode(&resp.text) or { return err }
+	resp := http.get_text(url) or { return println(err) }
+	body := json.decode(string, resp) or { return err }
 	
 	res := body.as_map()
 	return res
