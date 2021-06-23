@@ -14,8 +14,7 @@ struct ActivitiesOptions {
 struct ActivitiesOptions_Filters {
 	// Can only have one filter
 	channel_id string
-	channelId string
-	mine bool
+	mine bool [nonull]
 }
 
 struct ActivitiesResponse {
