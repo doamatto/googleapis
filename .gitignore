@@ -1,0 +1,11 @@
+# Ignore build binaries
+*.so
+*.dll
+*.exe
+*.ilk
+*.pdb
+examples/*
+!examples/*.*
+fmt_verify_all
+# To develop examples inside ui folder
+examples/modules
