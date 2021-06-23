@@ -34,8 +34,7 @@ struct ActivitiesResponse_PageInfo {
 
 // Returns a list of channel activity events that match the request criteria. For more information, see https://developers.google.com/youtube/v3/docs/activities/list
 pub fn activites_list(part string, options? ActivitiesOptions) ActivitiesResponse {
-	url := "https://www.googleapis.com/youtube/v3/activites?part=$part"
-	if (filters != nil) {
+	mut url := "https://www.googleapis.com/youtube/v3/activites?part=$part"
 		// Can only have one filter
 		if (filters.channelId && filters.mine) { return err }
 		if (filters.channelId) { url += "&channelId=$filters.channelId" }
