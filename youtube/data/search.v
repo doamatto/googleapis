@@ -3,52 +3,52 @@ import net.http
 import time
 
 struct SearchOptions {
-	filters Options_Filters // Can only use one.
-	channelId string
-	channelType string // Acceptable values are: `any`, `show`
-	contentType string // Acceptable values are: `channel`, `playlist`, `video`
-	eventType string // Acceptable values are: `completed`, `live`, `upcoming`
+	filters SearchOptions_Filters // Can only use one.
+	channel_id string
+	channel_type string // Acceptable values are: `any`, `show`
+	content_type string // Acceptable values are: `channel`, `playlist`, `video`
+	event_type string // Acceptable values are: `completed`, `live`, `upcoming`
 	location string
-	locationRadius string // Must end in: `m`, `km`, `ft`, or `mi`
-	maxResults u16 // Cannot exceed 50. Cannot be less than 1.
-	onBehalfOfContentOwner string
+	location_radius string // Must end in: `m`, `km`, `ft`, or `mi`
+	max_results u16 // Cannot exceed 50. Cannot be less than 1.
+	onbehalfof_contentowner string
 	order string // Acceptable values are: `date`, `rating`, `relevance`, `title`, `videoCount`, `viewCount`
-	pageToken string
-	publishedAfter string // Must be an ISO 8601 date-time value
-	publishedBefore string // Must be an ISO 8601 date-time value
+	page_token string
+	published_after string // Must be an ISO 8601 date-time value
+	published_before string // Must be an ISO 8601 date-time value
 	query string
-	regionCode string // Must be an ISO 3166-1 alpha-2 country code
-	relevanceLanguage string // Must be an ISO 639-1 two-letter language code
-	safeSearch string // Acceptable values are: `moderate`, `none`, `strict`
-	topicId string
-	videoCaption string // Acceptable values are: `any`, `closedCaption`, `none`
-	videoCategoryId string // contentType must be video
-	videoDefinition string // Acceptable values are: `any`, `high`, `standard`
-	videoDimension string // Acceptable values are: `2d`, `3d`, `any`
-	videoDuration string // Acceptable values are: `any`, `long`, `medium`, `short`
-	videoEmbeddable string // Acceptable values are: `any`, `true`
-	videoLicense string // Acceptable values are: `any`, `creativeCommon`, `youtube`
-	videoSyndicated string // Acceptable values are: `any`, `true`
-	videoType string // Acceptable values are: `any`, `episode`, `movie`
+	region_code string // Must be an ISO 3166-1 alpha-2 country code
+	relevance_language string // Must be an ISO 639-1 two-letter language code
+	safe_search string // Acceptable values are: `moderate`, `none`, `strict`
+	topic_id string
+	video_caption string // Acceptable values are: `any`, `closedCaption`, `none`
+	video_categoryid string // contentType must be video
+	video_definition string // Acceptable values are: `any`, `high`, `standard`
+	video_dimension string // Acceptable values are: `2d`, `3d`, `any`
+	video_duration string // Acceptable values are: `any`, `long`, `medium`, `short`
+	video_embeddable string // Acceptable values are: `any`, `true`
+	video_license string // Acceptable values are: `any`, `creativeCommon`, `youtube`
+	video_syndicated string // Acceptable values are: `any`, `true`
+	video_type string // Acceptable values are: `any`, `episode`, `movie`
 }
 struct SearchOptions_Filters {
-	forContentOwner bool // None of the following other parameters can be set: `videoDefinition`, `videoDimension`, `videoDuration, `videoLicense`, `videoEmbeddable`, `videoSyndicated`, `videoType`.
-	forDeveloper bool
-	forMine bool // The `contentType` parameter's value must be set to video. In addition, none of the following other parameters can be set: `videoDefinition`, `videoDimension`, `videoDuration, `videoLicense`, `videoEmbeddable`, `videoSyndicated`, `videoType`.
-	relatedToVideoId string // The `contentType` parameter's value must be set to video. In addition, only the following other parameters can be set: `part`, `maxResults`, `pageToken`, `regionCode`, `relevanceLanguage`, `safeSearch`, `fields`, and `contentType` (which must be set to video).
+	for_contentowner bool // None of the following other parameters can be set: `videoDefinition`, `videoDimension`, `videoDuration, `videoLicense`, `videoEmbeddable`, `videoSyndicated`, `videoType`.
+	for_developer bool
+	for_mine bool // The `contentType` parameter's value must be set to video. In addition, none of the following other parameters can be set: `videoDefinition`, `videoDimension`, `videoDuration, `videoLicense`, `videoEmbeddable`, `videoSyndicated`, `videoType`.
+	relatedto_videoid string // The `contentType` parameter's value must be set to video. In addition, only the following other parameters can be set: `part`, `maxResults`, `pageToken`, `regionCode`, `relevanceLanguage`, `safeSearch`, `fields`, and `contentType` (which must be set to video).
 }
 
 struct SearchResponse {
 	kind string
 	etag string
-	nextPageToken string
-	prevPageToken string
-	pageInfo Response_PageInfo
+	nextpage_token string
+	prevpage_token string
+	page_info SearchResponse_PageInfo
 	items map
 }
 struct SearchResponse_PageInfo {
-	totalResults int
-	resultsPerPage int
+	total_results int
+	results_per_page int
 }
 
 // Returns a list of categories that can be associated with YouTube videos. For more information, see https://developers.google.com/youtube/v3/docs/videoCategories/list
