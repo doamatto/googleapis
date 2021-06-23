@@ -34,8 +34,9 @@ pub fn videocategories_list(part string, options ?VideoCatsOptions) VideoCatsRes
 		if options.filters.region_code != "" { url += "&regionCode=$options.filters.region_code" }
 	}  
 	if options.hl != "" { url += "&hl=$options.hl" }
-	resp := http.get(url) or { return err }
-	body := json.decode(resp.text) or { return err }
+
+	resp := http.get(url) or { return println(err) }
+	body := json.decode(&resp.text) or { return err }
 	
 	res := body.as_map()
 	return res
