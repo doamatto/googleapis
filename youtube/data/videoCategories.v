@@ -1,7 +1,7 @@
 import net.http
 
 // Returns a list of categories that can be associated with YouTube videos. For more information, see https://developers.google.com/youtube/v3/docs/videoCategories/list
-pub fn list(part string, options ?[]{
+pub fn videoCategories_list(part string, options ?[]{
 	filters: {
 		id: string,
 		regionCode: string,
