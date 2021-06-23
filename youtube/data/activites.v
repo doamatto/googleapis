@@ -43,11 +43,16 @@ pub fn activites_list(part string, options? ActivitiesOptions) ActivitiesRespons
 	}  
 
 	if options.max_results != 0 { url += "&maxResults=$options.max_results" }
+	if options.page_token != "" { url += "&pageToken=$options.page_token" }
+	if options.published_after != "" {
 		date := time.parse_iso8601(options.published_after) or { return err }
+		url += "&publishedAfter=$date"
 	}
+	if options.published_before != "" {
 		date := time.parse_iso8601(options.published_before) or { return err }
+		url = "&publishedBefore=$date"
 	}
-	if(options.regionCode) { url = "$url&regionCode=$options.regionCode" }
+	if options.region_code != "" { url = "$url&regionCode=$options.region_code" }
 
 	resp := http.get_text(url) or { return err }
 	mut body := json.decode(resp) or { return err }
