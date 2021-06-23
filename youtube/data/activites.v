@@ -43,10 +43,9 @@ pub fn activites_list(part string, options? ActivitiesOptions) ActivitiesRespons
 	}  
 
 	if options.max_results != 0 { url += "&maxResults=$options.max_results" }
+		date := time.parse_iso8601(options.published_after) or { return err }
 	}
-	if(options.publishedBefore) {
-		date := parse_iso8601(options.publishedBefore) or { return err }
-		url = "&publishedBefore=$options.date"
+		date := time.parse_iso8601(options.published_before) or { return err }
 	}
 	if(options.regionCode) { url = "$url&regionCode=$options.regionCode" }
 
