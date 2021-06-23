@@ -6,20 +6,20 @@ struct VideoCatsOptions {
 }
 struct VideoCatsOptions_Filters {
 	id string
-	regionCode string
+	region_code string
 }
 
 struct VideoCatsResponse {
 	kind string
 	etag string
-	nextPageToken string
-	prevPageToken string
-	pageInfo Response_PageInfo
+	nextpage_token string
+	prevpage_token string
+	page_info VideoCatsResponse_PageInfo
 	items map
 }
 struct VideoCatsResponse_PageInfo {
-	totalResults int
-	resultsPerPage int
+	total_results int
+	results_per_page int
 }
 
 // Returns a list of categories that can be associated with YouTube videos. For more information, see https://developers.google.com/youtube/v3/docs/videoCategories/list
@@ -29,7 +29,7 @@ pub fn videocategories_list(part string, options ?VideoCatsOptions) VideoCatsRes
 		if (filters.id && filters.regionCode) { return err }
 		if (filters.id) { url += "&id=$filters.id" }
 		// TOOD: add check for regionCode
-		if (filters.regionCode) { url += "&regionCode=$filters.regionCode" }
+		if options.filters.region_code != "" { url += "&regionCode=$options.filters.region_code" }
 	}  
 
 	if(options.hl) { url += "&hl=$options.hl" }
