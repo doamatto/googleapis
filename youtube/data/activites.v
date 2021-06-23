@@ -55,9 +55,9 @@ pub fn activites_list(part string, options? ActivitiesOptions) ActivitiesRespons
 	if options.region_code != "" { url = "$url&regionCode=$options.region_code" }
 
 	resp := http.get_text(url) or { return err }
-	mut body := json.decode(resp) or { return err }
-	
+	body := json.decode(string, resp) or { return err }
 	res := body.as_map()
+
 	return res
 }
 
