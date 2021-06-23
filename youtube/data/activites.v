@@ -3,16 +3,17 @@ import net.http
 import time
 
 struct ActivitiesOptions {
-	filters Options_Filters
-	maxResults u16
-	pageToken string
-	publishedAfter string // Must be ISO 8601
-	publishedBefore string // Must be ISO 8601 
-	regionCode string // Must be ISO 3166-1 alpha-2
+	filters ActivitiesOptions_Filters
+	max_results u16
+	page_token string
+	published_after string // Must be ISO 8601
+	published_before string // Must be ISO 8601 
+	region_code string // Must be ISO 3166-1 alpha-2
 }
 
 struct ActivitiesOptions_Filters {
 	// Can only have one filter
+	channel_id string
 	channelId string
 	mine bool
 }
@@ -20,15 +21,15 @@ struct ActivitiesOptions_Filters {
 struct ActivitiesResponse {
 	kind string
 	etag string
-	nextPageToken string
-	prevPageToken string
-	pageInfo Response_PageInfo
+	nextpage_token string
+	prevpage_token string
+	page_info ActivitiesResponse_PageInfo
 	items map
 }
 
 struct ActivitiesResponse_PageInfo {
-	totalResults int
-	resultsPerPage int
+	total_results int
+	resultsper_page int
 }
 
 // Returns a list of channel activity events that match the request criteria. For more information, see https://developers.google.com/youtube/v3/docs/activities/list
