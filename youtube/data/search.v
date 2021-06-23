@@ -105,152 +105,119 @@ pub fn search_list(part string, options SearchOptions) SearchResponse {
 		}
 	}  
 
-	if(options.channelId) { url += "&channelId=$options.channelId" }
-	if(options.channelType) {
-		if (
-			options.channelType != "any" ||
-			options.channelType != "show"
-		) { return err }
-		url += "&channelType=$options.channelType"
+	if options.channel_id != "" { url += "&channelId=$options.channel_id" }
+	if options.channel_type != "" {
+		if options.channel_type != "any" || options.channel_type != "show" { return err }
+		url += "&channelType=$options.channel_type"
 	}
-	if(options.contentType) {
-		if(
-			options.contentType != "channel" ||
-			options.contentType != "playlist" ||
-			options.contentType != "video"
-		) { return err }
-		url += "&contentType=$options.contentType"
+	if options.content_type != "" {
+		if options.content_type != "channel" ||
+			options.content_type != "playlist" ||
+			options.content_type != "video" { return err }
+		url += "&contentType=$options.content_type"
 	}
-	if(options.eventType) {
-		if(
-			options.eventType != "completed" ||
-			options.eventType != "live" ||
-			options.eventType != "upcoming"
-		) { return err }
-		url += "&eventType=$options.eventType"
+	if options.event_type != "" {
+		if options.event_type != "completed" ||
+			options.event_type != "live" ||
+			options.event_type != "upcoming" { return err }
+		url += "&eventType=$options.event_type"
 	}
-	if(options.location) { url += "&eventType=$options.location" }
-	if(options.locationRadius) {
-		if (
-			!options.locationRadius.ends_with("m") ||
-			!options.locationRadius.ends_with("km") ||
-			!options.locationRadius.ends_with("ft") ||
-			!options.locationRadius.ends_with("mi")
-		) { return err }
-		url += "&eventType=$options.locationRadius"
+	if options.location != "" { url += "&eventType=$options.location" }
+	if options.location_radius != "" {
+		if !options.location_radius.ends_with("m") ||
+			!options.location_radius.ends_with("km") ||
+			!options.location_radius.ends_with("ft") ||
+			!options.location_radius.ends_with("mi") { return err }
+		url += "&eventType=$options.location_radius"
 	}
-	if(options.maxResults) {
-		if (
-			options.maxResults < 0 ||
-			options.maxResults >= 50
-		) { return err }
-		url += "&eventType=$options.maxResults"
+	if options.max_results != 0 {
+		if options.max_results < 0 || options.max_results >= 50 { return err }
+		url += "&eventType=$options.max_results"
 	} else {
 		url += "&eventType=5"
 	}
-	if(options.onBehalfOfContentOwner) { url += "&onBehalfOfContentOwner=$options.onBehalfOfContentOwner" }
-	if(options.order) {
-		if (
-			options.order != "date" ||
+	if options.onbehalfof_contentowner != "" { url += "&onBehalfOfContentOwner=$options.onbehalfof_contentowner" }
+	if options.order != "" {
+		if options.order != "date" ||
 			options.order != "rating" ||
 			options.order != "relevance" ||
 			options.order != "title" ||
 			options.order != "videoCount" ||
-			options.order != "viewCount"
-		) { return err }
+			options.order != "viewCount" { return err }
 		url += "&order=$options.order"
 	}
+	if options.page_token != "" { url += "&pageToken=$options.page_token" }
+	if options.published_after != "" {
 		date := time.parse_iso8601(options.published_after) or { return err }
+		url += "&publishedAfter=$date"
 	}
+	if options.published_before != "" {
 		date := time.parse_iso8601(options.published_before) or { return err }
+		url = "&publishedBefore=$date"
 	}
-	if(options.query) { url += "&q=$options.query" }
-	if(options.regionCode) { url += "&q=$options.regionCode" }
-	if(options.relevanceLanguage) { url += "&q=$options.relevanceLanguage" }
-	if(options.safeSearch) {
-		if(
-			options.safeSearch != "moderate" ||
-			options.safeSearch != "none" ||
-			options.safeSearch != "strict"
-		) { return err }
-		url += "&safeSearch=$options.safeSearch"
+	if options.query != "" { url += "&q=$options.query" }
+	if options.region_code != "" { url += "&q=$options.region_code" }
+	if options.relevance_language != "" { url += "&q=$options.relevance_language" }
+	if options.safe_search != "" {
+		if options.safe_search != "moderate" ||
+			options.safe_search != "none" ||
+			options.safe_search != "strict" { return err }
+		url += "&safeSearch=$options.safe_search"
 	}
-	if(options.topicId) { url += "&topicId=$options.topicId" }
-	if(options.videoCaption) {
-		if (
-			options.videoCaption != "any" ||
-			options.videoCaption != "closedCaption" ||
-			options.videoCaption != "none"
-		) { return err }
-		url += "&videoCaption=$options.videoCaption"
+	if options.topic_id != "" { url += "&topicId=$options.topic_id" }
+	if options.video_caption != "" {
+		if options.video_caption != "any" ||
+			options.video_caption != "closedCaption" ||
+			options.video_caption != "none" { return err }
+		url += "&videoCaption=$options.video_caption"
 	}
-	if(options.videoCategoryId) {
-		if (
-			options.contentType != nil ||
-			options.contentType != "video"
-		) { return err }
-		url += "&videoCategoryId=$options.videoCategoryId"
+	if options.video_categoryid != "" {
+		if options.video_categoryid != "" || options.video_categoryid != "video" { return err }
+		url += "&videoCategoryId=$options.video_categoryid"
 	}
-	if(options.videoDefinition) {
-		if (
-			options.videoDefinition != "any" ||
-			options.videoDefinition != "high" ||
-			options.videoDefinition != "standard"
-		) { return err }
-		url += "&videoDefinition=$options.videoDefinition"
+	if options.video_definition != "" {
+		if options.video_definition != "any" ||
+			options.video_definition != "high" ||
+			options.video_definition != "standard" { return err }
+		url += "&videoDefinition=$options.video_definition"
 	}
-	if(options.videoDimension) {
-		if (
-			options.videoDimension != "2d" ||
-			options.videoDimension != "3d" ||
-			options.videoDimension != "any"
-		) { return err }
-		url += "&videoDimension=$options.videoDimension"
+	if options.video_dimension != "" {
+		if options.video_dimension != "2d" ||
+			options.video_dimension != "3d" ||
+			options.video_dimension != "any" { return err }
+		url += "&videoDimension=$options.video_dimension"
 	}
-	if(options.videoDuration) {
-		if (
-			options.videoDuration != "any" ||
-			options.videoDuration != "long" ||
-			options.videoDuration != "medium" ||
-			options.videoDuration != "short"
-		) { return err }
-		url += "&videoDuration=$options.videoDuration"
+	if options.video_duration != "" {
+		if options.video_duration != "any" ||
+			options.video_duration != "long" ||
+			options.video_duration != "medium" ||
+			options.video_duration != "short" { return err }
+		url += "&videoDuration=$options.video_duration"
 	}
-	if(options.videoEmbeddable) {
-		if (
-			options.videoEmbeddable != "any" ||
-			options.videoEmbeddable != "true"
-		) { return err }
-		url += "&videoEmbeddable=$options.videoEmbeddable"
+	if options.video_embeddable != "" {
+		if options.video_embeddable != "any" ||	options.video_embeddable != "true" { return err }
+		url += "&videoEmbeddable=$options.video_embeddable"
 	}
-	if(options.videoLicense) {
-		if (
-			options.videoLicense != "creativeCommon" ||
-			options.videoLicense != "youtube" ||
-			options.videoLicense != "any"
-		) { return err }
-		url += "&videoLicense=$options.videoLicense"
+	if options.video_license != "" {
+		if options.video_license != "creativeCommon" ||
+			options.video_license != "youtube" ||
+			options.video_license != "any" { return err }
+		url += "&videoLicense=$options.video_license"
 	}
-	if(options.videoSyndicated) {
-		if (
-			options.videoSyndicated != "any" ||
-			options.videoSyndicated != "true"
-		) { return err }
-		url += "&videoSyndicated=$options.videoSyndicated"
+	if options.video_syndicated != "" {
+		if options.video_syndicated != "any" ||	options.video_syndicated != "true" { return err }
+		url += "&videoSyndicated=$options.video_syndicated"
 	}
-	if(options.videoType) {
-		if(
-			options.videoType != "any" ||
-			options.videoType != "episode" ||
-			options.videoType != "movie"
-		) { return err }
-		url += "&videoType=$options.videoType"
+	if options.video_type != "" {
+		if options.video_type != "any" ||
+			options.video_type != "episode" ||
+			options.video_type != "movie" { return err }
+		url += "&videoType=$options.video_type"
 	}
 
-	resp := http.get(url) or { return err }
-	body := json.decode(resp.text) or { return err }
+	resp := http.get_text(url) or { return err }
+	body := json.decode(string, resp) or { return err }
 	
 	res := body.as_map()
 	return res
-
 }
