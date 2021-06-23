@@ -42,11 +42,7 @@ pub fn activites_list(part string, options? ActivitiesOptions) ActivitiesRespons
 		if options.filters.mine == true { url += "&mine=$options.filters.mine" }
 	}  
 
-	if(options.maxResults) { url += "&maxResults=$options.maxResults" }
-	if(options.pageToken) { url += "&pageToken=$options.pageToken" }
-	if(options.publishedAfter) {
-		date := parse_iso8601(options.publishedAfter) or { return err }
-		url += "&publishedAfter=$options.date"
+	if options.max_results != 0 { url += "&maxResults=$options.max_results" }
 	}
 	if(options.publishedBefore) {
 		date := parse_iso8601(options.publishedBefore) or { return err }
