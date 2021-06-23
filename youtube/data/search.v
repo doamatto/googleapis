@@ -160,14 +160,9 @@ pub fn search_list(part string, options SearchOptions) SearchResponse {
 		) { return err }
 		url += "&order=$options.order"
 	}
-	if(options.pageToken) { url += "&pageToken=$options.pageToken" }
-	if(options.publishedAfter) {
-		date := parse_iso8601(options.publishedAfter) or { return err }
-		url += "&publishedAfter=$options.date"
+		date := time.parse_iso8601(options.published_after) or { return err }
 	}
-	if(options.publishedBefore) {
-		date := parse_iso8601(options.publishedBefore) or { return err }
-		url = "&publishedBefore=$options.date"
+		date := time.parse_iso8601(options.published_before) or { return err }
 	}
 	if(options.query) { url += "&q=$options.query" }
 	if(options.regionCode) { url += "&q=$options.regionCode" }
