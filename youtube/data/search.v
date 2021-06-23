@@ -57,57 +57,51 @@ pub fn search_list(part string, options SearchOptions) SearchResponse {
 	if options.filters != {} {
 		// Can only have one filter
 		// TODO: prevent usage of more than one
-		if (filters.forContentOwner) {
-			if(
-				options.videoDefinition != nil ||
-				options.videoDimension != nil ||
-				options.videoDuration != nil ||
-				options.videoLicense != nil ||
-				options.videoEmbeddable != nil ||
-				options.videoSyndicated != nil ||
-				options.videoType != nil
-			) { return err }
-			url += "&forContentOwner=$filters.forContentOwner"
+		if options.filters.for_contentowner == true {
+			if options.video_definition != "" ||
+				options.video_dimension != "" ||
+				options.video_duration != "" ||
+				options.video_license != "" ||
+				options.video_embeddable != "" ||
+				options.video_syndicated != "" ||
+				options.video_type != "" { return err }
+			url += "&forContentOwner=$options.filters.for_contentowner"
 		}
-		if (filters.forDeveloper) {	url += "&forDeveloper=$filters.forDeveloper" }
-		if (filters.forMine) {
-			if(
-				options.videoDefinition != nil ||
-				options.videoDimension != nil ||
-				options.videoDuration != nil ||
-				options.videoLicense != nil ||
-				options.videoEmbeddable != nil ||
-				options.videoSyndicated != nil ||
-				options.videoType != nil
-			) { return err }
-			if (options.contentType != "video") { return err }
-			url += "&forDeveloper=$filters.forMine"
+		if options.filters.for_developer == true {	url += "&forDeveloper=$options.filters.for_developer" }
+		if options.filters.for_mine == true {
+			if options.video_definition != "" ||
+				options.video_dimension != "" ||
+				options.video_duration != "" ||
+				options.video_license != "" ||
+				options.video_embeddable != "" ||
+				options.video_syndicated != "" ||
+				options.video_type != "" { return err }
+			if options.content_type != "video" { return err }
+			url += "&forDeveloper=$options.filters.for_mine"
 		}
-		if (filters.relatedToVideoId) {
-			if(
-				options.channelId != nil ||
-				options.channelType != nil ||
-				options.eventType != nil ||
-				options.location != nil ||
-				options.locationRadius != nil ||
-				options.onBehalfOfContentOwner != nil ||
-				options.order != nil ||
-				options.publishedAfter != nil ||
-				options.publishedBefore != nil ||
-				options.query != nil ||
-				options.topicId != nil ||
-				options.videoCaption != nil ||
-				options.videoCategoryId != nil ||
-				options.videoDefinition != nil ||
-				options.videoDimension != nil ||
-				options.videoDuration != nil ||
-				options.videoEmbeddable != nil ||
-				options.videoLicense != nil ||
-				options.videoSyndicated != nil ||
-				options.videoType != nil
-			) { return err }
-			if (options.contentType != "video") { return err }
-			url += "&forDeveloper=$filters.relatedToVideoId"
+		if options.filters.relatedto_videoid != "" {
+			if options.channel_id != "" ||
+				options.channel_type != "" ||
+				options.event_type != "" ||
+				options.location != "" ||
+				options.location_radius != "" ||
+				options.onbehalfof_contentowner != "" ||
+				options.order != "" ||
+				options.published_after != "" ||
+				options.published_before != "" ||
+				options.query != "" ||
+				options.topic_id != "" ||
+				options.video_caption != "" ||
+				options.video_categoryid != "" ||
+				options.video_definition != "" ||
+				options.video_dimension != "" ||
+				options.video_duration != "" ||
+				options.video_embeddable != "" ||
+				options.video_license != "" ||
+				options.video_syndicated != "" ||
+				options.video_type != "" { return err }
+			if options.content_type != "video" { return err }
+			url += "&forDeveloper=$options.filters.relatedto_videoid"
 		}
 	}  
 
