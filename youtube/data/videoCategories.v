@@ -26,14 +26,13 @@ struct VideoCatsResponse_PageInfo {
 pub fn videocategories_list(part string, options ?VideoCatsOptions) VideoCatsResponse {
 	mut url := "https://www.googleapis.com/youtube/v3/videoCategories?part=$part"
 		// Can only have one filter
-		if (filters.id && filters.regionCode) { return err }
-		if (filters.id) { url += "&id=$filters.id" }
+		if options.filters.id != "" { url += "&id=$options.filters.id" }
 		// TOOD: add check for regionCode
 		if options.filters.region_code != "" { url += "&regionCode=$options.filters.region_code" }
 	}  
 
 	if(options.hl) { url += "&hl=$options.hl" }
-
+	if options.hl != "" { url += "&hl=$options.hl" }
 	resp := http.get(url) or { return err }
 	body := json.decode(resp.text) or { return err }
 	
